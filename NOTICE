@@ -1,0 +1,157 @@
+zigcv NOTICE
+
+zigcv is distributed under the MIT License (LICENSE). Parts of it are
+derivative works of third-party software whose licences require the notices
+in this file to accompany every copy, in source or binary form.
+
+1. OpenCV (https://github.com/opencv/opencv)
+
+   The image processing kernels in src/ are ports to Zig of OpenCV source
+   files: the algorithms, constants, tables and the order of arithmetic were
+   taken from those files and rewritten in Zig. Each ported file carries a
+   header naming its sources and stating that it was modified (translated to
+   Zig, restructured around slices and the caller's allocator, and stripped
+   of OpenCV's dispatch, OpenCL, IPP and HAL layers).
+
+   OpenCV as a whole is licensed under the Apache License, Version 2.0; a
+   copy is in LICENSE-APACHE, as section 4(a) of that licence requires.
+   Several of the ported files still carry OpenCV's earlier 3-clause BSD
+   licence header; that header, with its copyright notice, conditions and
+   disclaimer, is reproduced below as it requires.
+
+   Ported files:
+
+   | zigcv file | OpenCV source files | Licence of the source |
+   |---|---|---|
+   | `src/gauss.zig` | `modules/imgproc/src/smooth.dispatch.cpp`, `modules/imgproc/src/smooth.simd.hpp`, `modules/imgproc/src/filter.simd.hpp`, `modules/imgproc/src/fixedpoint.inl.hpp` | Apache-2.0; BSD-3-Clause |
+   | `src/resize.zig` | `modules/imgproc/src/resize.cpp` | BSD-3-Clause |
+   | `src/color.zig` | `modules/imgproc/src/color_rgb.simd.hpp`, `modules/imgproc/src/color_hsv.simd.hpp` | Apache-2.0 |
+   | `src/threshold.zig` | `modules/imgproc/src/thresh.cpp` | BSD-3-Clause |
+   | `src/arith.zig` | `modules/core/src/arithm.simd.hpp` | Apache-2.0 |
+   | `src/morph.zig` | `modules/imgproc/src/morph.dispatch.cpp`, `modules/imgproc/src/morph.simd.hpp` | BSD-3-Clause |
+   | `src/warp.zig` | `modules/imgproc/src/imgwarp.cpp`, `modules/imgproc/src/warp_kernels.simd.hpp`, `modules/imgproc/src/warp_common.vector.hpp`, `modules/imgproc/src/warp_common.scalar.hpp` | Apache-2.0; BSD-3-Clause |
+   | `src/util.zig` | `modules/core/include/opencv2/core/fast_math.hpp (cvRound), modules/core/src/copy.cpp (borderInterpolate)` | Apache-2.0 |
+   | `src/par.zig` | `modules/core/src/parallel.cpp (the row-band scheme only)` | Apache-2.0 |
+
+   OpenCV copyright notices (the COPYRIGHT file of the OpenCV repository):
+
+   Copyright (C) 2000-2022, Intel Corporation, all rights reserved.
+   Copyright (C) 2009-2011, Willow Garage Inc., all rights reserved.
+   Copyright (C) 2009-2016, NVIDIA Corporation, all rights reserved.
+   Copyright (C) 2010-2013, Advanced Micro Devices, Inc., all rights reserved.
+   Copyright (C) 2015-2023, OpenCV Foundation, all rights reserved.
+   Copyright (C) 2008-2016, Itseez Inc., all rights reserved.
+   Copyright (C) 2019-2023, Xperience AI, all rights reserved.
+   Copyright (C) 2019-2022, Shenzhen Institute of Artificial Intelligence and Robotics for Society, all rights reserved.
+   Copyright (C) 2022-2023, Southern University of Science And Technology, all rights reserved.
+   Copyright (C) 2023-2025, OpenCV AI, all rights reserved.
+   Copyright (C) 2024, Bigvision LLC, all rights reserved.
+   
+   Third party copyrights are property of their respective owners.
+
+   Legacy OpenCV licence header (3-clause BSD), carried by the files marked
+   BSD-3-Clause above:
+
+    IMPORTANT: READ BEFORE DOWNLOADING, COPYING, INSTALLING OR USING.
+   
+    By downloading, copying, installing or using the software you agree to this license.
+    If you do not agree to this license, do not download, install,
+    copy or use the software.
+   
+   
+                             License Agreement
+                  For Open Source Computer Vision Library
+   
+   Copyright (C) 2000-2008, Intel Corporation, all rights reserved.
+   Copyright (C) 2009, Willow Garage Inc., all rights reserved.
+   Copyright (C) 2014-2015, Itseez Inc., all rights reserved.
+   Third party copyrights are property of their respective owners.
+   
+   Redistribution and use in source and binary forms, with or without modification,
+   are permitted provided that the following conditions are met:
+   
+     * Redistribution's of source code must retain the above copyright notice,
+       this list of conditions and the following disclaimer.
+   
+     * Redistribution's in binary form must reproduce the above copyright notice,
+       this list of conditions and the following disclaimer in the documentation
+       and/or other materials provided with the distribution.
+   
+     * The name of the copyright holders may not be used to endorse or promote products
+       derived from this software without specific prior written permission.
+   
+   This software is provided by the copyright holders and contributors "as is" and
+   any express or implied warranties, including, but not limited to, the implied
+   warranties of merchantability and fitness for a particular purpose are disclaimed.
+   In no event shall the Intel Corporation or contributors be liable for any direct,
+   indirect, incidental, special, exemplary, or consequential damages
+   (including, but not limited to, procurement of substitute goods or services;
+   loss of use, data, or profits; or business interruption) however caused
+   and on any theory of liability, whether in contract, strict liability,
+   or tort (including negligence or otherwise) arising in any way out of
+   the use of this software, even if advised of the possibility of such damage.
+
+2. zigimg (https://github.com/zigimg/zigimg)
+
+   src/pixel.zig takes the layout of the Rgb24, Bgr24 and Grayscale8 pixel
+   structs from zigimg's src/color.zig.
+
+   MIT License
+   Copyright (c) 2019-2021 zigimg developers
+
+   Permission is hereby granted, free of charge, to any person obtaining a
+   copy of this software and associated documentation files (the "Software"),
+   to deal in the Software without restriction, including without limitation
+   the rights to use, copy, modify, merge, publish, distribute, sublicense,
+   and/or sell copies of the Software, and to permit persons to whom the
+   Software is furnished to do so, subject to the following conditions: The
+   above copyright notice and this permission notice shall be included in all
+   copies or substantial portions of the Software. THE SOFTWARE IS PROVIDED
+   "AS IS", WITHOUT WARRANTY OF ANY KIND.
+
+3. ITU-T Recommendations T.4 and T.6
+
+   src/tiff.zig implements the modified Huffman and modified modified READ
+   codes of ITU-T T.4 and T.6 from the published Recommendations; the code
+   tables are the standard's data. The coder's structure follows an earlier
+   Group 4 coder by the same author, released here under the MIT License.
+
+4. zignal (https://github.com/arrufat/zignal)
+
+   src/png.zig follows the scheme of zignal's src/codecs/png.zig for the
+   parallel IDAT: every row chunk is its own Deflate stream ended by a sync
+   flush, the streams are concatenated into one zlib member and the Adler-32
+   is combined from the chunks' checksums. The code is zigcv's own.
+
+   MIT License
+   Copyright (c) 2024-2026 B Factory Inc (info@bfactory.ai)
+   Copyright (c) Zignal Contributors
+
+   Permission is hereby granted, free of charge, to any person obtaining a
+   copy of this software and associated documentation files (the "Software"),
+   to deal in the Software without restriction, including without limitation
+   the rights to use, copy, modify, merge, publish, distribute, sublicense,
+   and/or sell copies of the Software, and to permit persons to whom the
+   Software is furnished to do so, subject to the following conditions: The
+   above copyright notice and this permission notice shall be included in all
+   copies or substantial portions of the Software. THE SOFTWARE IS PROVIDED
+   "AS IS", WITHOUT WARRANTY OF ANY KIND.
+
+5. zlib (https://zlib.net)
+
+   crc32Combine in src/png.zig applies the GF(2) matrix method of zlib's
+   crc32_combine (crc32.c), rewritten in Zig; the CRC-32 tables are the
+   standard polynomial's. zlib is distributed under the zlib licence:
+
+   Copyright (C) 1995-2024 Jean-loup Gailly and Mark Adler
+
+   This software is provided 'as-is', without any express or implied
+   warranty. In no event will the authors be held liable for any damages
+   arising from the use of this software. Permission is granted to anyone to
+   use this software for any purpose, including commercial applications, and
+   to alter it and redistribute it freely, subject to the following
+   restrictions: 1. The origin of this software must not be misrepresented;
+   you must not claim that you wrote the original software. 2. Altered source
+   versions must be plainly marked as such, and must not be misrepresented as
+   being the original software. 3. This notice may not be removed or altered
+   from any source distribution.
