@@ -3,6 +3,7 @@
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/mgbilby/zigcv/blob/main/LICENSE)
 [![Zig](https://img.shields.io/badge/Zig-0.17%2B-f7a41d)](https://ziglang.org/)
 [![accuracy](https://img.shields.io/badge/vs%20cv2-bit--exact-brightgreen.svg)](BENCHMARKS.md)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23573956.svg)](https://doi.org/10.5281/zenodo.23573956)
 
 OpenCV-equivalent image processing in pure Zig, bit-exact with `cv2`: the kernels are ported from OpenCV's own sources with their fixed-point and float arithmetic intact, so a pipeline moved from `cv2` to zigcv produces the same bytes. TIFF and PNG readers and writers included, no C libraries.
 
